@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
   questionsWrapper: {
     width: '100%',
     padding: 10,
-    marginTop: 15,
-
+    // backgroundColor: 'green',
     borderRadius: 30,
   },
   questiontext: {
@@ -21,9 +20,8 @@ const styles = StyleSheet.create({
 
   choices: {
     width: '100%',
-    height: '80%',
+    height: '75%',
     padding: 10,
-    marginTop: 10,
     backgroundColor: 'white',
     borderRadius: 15,
     backgroundColor: '#D1F1FF',
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#005eff',
     justifyContent: 'center',
-    marginTop: 50,
     alignItems: 'center',
   },
   btnText: {

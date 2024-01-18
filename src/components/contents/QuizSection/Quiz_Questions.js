@@ -89,7 +89,7 @@ const Quiz_Questions = ({route}) => {
         indeterminate={false}
         progress={progress}
         color={'#0079FF'}
-        style={{width: '100%', height: 30, borderRadius: 10, marginTop: 20}}
+        style={{width: '100%', height: 30, borderRadius: 10, marginTop: 15}}
       />
       {/* ----------COUNTER--------------- */}
       <View style={{paddingTop: 10, paddingLeft: 5}}>
@@ -115,10 +115,9 @@ const Quiz_Questions = ({route}) => {
               disabled={isDisabledOption}
               style={{
                 width: '100%',
-                // height: 55,
                 padding: 15,
                 borderRadius: 10,
-                marginTop: 20,
+                marginTop: 15,
                 flexDirection: 'row',
                 borderWidth: 2,
                 alignItems: 'center',
@@ -151,7 +150,7 @@ const Quiz_Questions = ({route}) => {
         </View>
         {/* ---------------------next button----------------- */}
         {showNextBtn && (
-          <View>
+          <View style={{marginTop: 'auto'}}>
             <TouchableOpacity onPress={handleNext} style={styles.nextbtn}>
               <Text style={styles.btnText}>Next</Text>
             </TouchableOpacity>
