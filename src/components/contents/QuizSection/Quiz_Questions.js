@@ -21,7 +21,6 @@ const Quiz_Questions = ({route}) => {
   // -------Quiz title------------
   const title = route.params.title;
   const [progress, setProgress] = useState(0); // Change this value to set the progress
-  const progressBarColor = '#8ed4ee';
   const allQuestion = data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctOption, setCorrectOption] = useState(null);
@@ -89,7 +88,7 @@ const Quiz_Questions = ({route}) => {
         indeterminate={false}
         progress={progress}
         color={'#0079FF'}
-        style={{width: '100%', height: 30, borderRadius: 10, marginTop: 15}}
+        style={{width: '100%', height: 25, borderRadius: 10, marginTop: 15}}
       />
       {/* ----------COUNTER--------------- */}
       <View style={{paddingTop: 10, paddingLeft: 5}}>
@@ -117,7 +116,7 @@ const Quiz_Questions = ({route}) => {
                 width: '100%',
                 padding: 15,
                 borderRadius: 10,
-                marginTop: 15,
+                marginTop: 10,
                 flexDirection: 'row',
                 borderWidth: 2,
                 alignItems: 'center',

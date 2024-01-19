@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
   choices: {
     width: '100%',
-    height: '75%',
+    height: '72%',
     padding: 10,
     backgroundColor: 'white',
     borderRadius: 15,
