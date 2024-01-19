@@ -72,7 +72,6 @@ const Videos = () => {
                   height={300}
                   videoId={item.videoId}
                   play={false}
-                  style={styles.youtube}
                   showinfo={false}
                   modestbranding
                 />
@@ -104,25 +103,23 @@ const styles = StyleSheet.create({
   videoWrapper: {
     flex: 1,
     margin: 15,
+    // backgroundColor: 'lightgreen',
   },
   title: {
     fontWeight: 'bold',
     fontSize: 22,
     color: 'black',
-    marginBottom: 15,
   },
   videoContainer: {
-    flex: 1,
     backgroundColor: '#D1F1FF',
     marginRight: 15,
     width: 300,
-    height: 'auto',
     borderRadius: 10,
-    overflow: 'hidden',
     // elevation: 3,
     padding: 10,
     borderWidth: 0.8,
     borderColor: '#9fe0fc',
+    marginTop: 20,
   },
   moreContainer: {
     flex: 1,
@@ -137,9 +134,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     fontWeight: 'bold',
-  },
-  youtube: {
-    borderRadius: 10,
   },
   image: {
     width: '50%',
