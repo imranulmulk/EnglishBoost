@@ -26,7 +26,7 @@ import AllEngCartoons from '../components/contents/AllVideos/AllEngCartoons';
 import AllNativeEnglish from '../components/contents/AllVideos/AllNativeEnglish';
 import AllEngGrammar from '../components/contents/AllVideos/AllEngGrammar';
 import AllEngIdioms from '../components/contents/AllVideos/AllEngIdioms';
-// import Voices from '../components/Contents/Voices/Voices';
+import Voices from '../components/contents/Voices/Voices';
 import Dictionary from '../components/contents/Dictionary/Dictionary';
 import {Header} from 'react-native/Libraries/NewAppScreen';
 
@@ -74,7 +74,7 @@ function AppNavigation() {
         <Stack.Screen name="AllNativeEnglish" component={AllNativeEnglish} />
         <Stack.Screen name="AllEngGrammar" component={AllEngGrammar} />
         <Stack.Screen name="AllEngIdioms" component={AllEngIdioms} />
-        {/* <Stack.Screen name="Voices" component={Voices} /> */}
+        <Stack.Screen name="Voices" component={Voices} />
         <Stack.Screen name="Dictionary" component={Dictionary} />
       </Stack.Navigator>
     </NavigationContainer>
