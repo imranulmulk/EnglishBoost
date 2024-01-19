@@ -59,6 +59,12 @@ const Navbar = () => {
       names: 'VocabularyCategories',
       image: require('../../../assets/Vocabulary.png'),
     },
+    {
+      id: 9,
+      title: 'Dictionary',
+      names: 'Dictionary',
+      image: require('../../../assets/Vocabulary.png'),
+    },
   ];
   const navigation = useNavigation();
   return (
