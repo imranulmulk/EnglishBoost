@@ -30,6 +30,8 @@ import Voices from '../components/contents/Voices/Voices';
 import Dictionary from '../components/contents/Dictionary/Dictionary';
 import Stories from '../components/contents/Pdfs/Stories/Stories';
 import ViewStory from '../components/contents/Pdfs/Stories/ViewStory';
+import Books from '../components/contents/Pdfs/Books/Books';
+import ViewBook from '../components/contents/Pdfs/Books/ViewBook';
 import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createNativeStackNavigator();
@@ -80,6 +82,8 @@ function AppNavigation() {
         <Stack.Screen name="Dictionary" component={Dictionary} />
         <Stack.Screen name="Stories" component={Stories} />
         <Stack.Screen name="ViewStory" component={ViewStory} />
+        <Stack.Screen name="Books" component={Books} />
+        <Stack.Screen name="ViewBook" component={ViewBook} />
       </Stack.Navigator>
     </NavigationContainer>
   );

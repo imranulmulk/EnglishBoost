@@ -43,24 +43,30 @@ const Navbar = () => {
     },
     {
       id: 7,
+      title: 'Books',
+      names: 'Books',
+      image: require('../../../assets/partOfspeech.png'),
+    },
+    {
+      id: 8,
       title: 'Stories',
       names: 'Stories',
       image: require('../../../assets/partOfspeech.png'),
     },
     {
-      id: 8,
+      id: 9,
       title: 'Quiz',
       names: 'Quiz',
       image: require('../../../assets/Quiz.png'),
     },
     {
-      id: 9,
+      id: 10,
       title: 'Vocabulary',
       names: 'VocabularyCategories',
       image: require('../../../assets/Vocabulary.png'),
     },
     {
-      id: 10,
+      id: 11,
       title: 'Dictionary',
       names: 'Dictionary',
       image: require('../../../assets/Vocabulary.png'),
