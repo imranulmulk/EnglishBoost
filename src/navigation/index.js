@@ -28,6 +28,8 @@ import AllEngGrammar from '../components/contents/AllVideos/AllEngGrammar';
 import AllEngIdioms from '../components/contents/AllVideos/AllEngIdioms';
 import Voices from '../components/contents/Voices/Voices';
 import Dictionary from '../components/contents/Dictionary/Dictionary';
+import Stories from '../components/contents/Pdfs/Stories/Stories';
+import ViewStory from '../components/contents/Pdfs/Stories/ViewStory';
 import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +78,8 @@ function AppNavigation() {
         <Stack.Screen name="AllEngIdioms" component={AllEngIdioms} />
         <Stack.Screen name="Voices" component={Voices} />
         <Stack.Screen name="Dictionary" component={Dictionary} />
+        <Stack.Screen name="Stories" component={Stories} />
+        <Stack.Screen name="ViewStory" component={ViewStory} />
       </Stack.Navigator>
     </NavigationContainer>
   );

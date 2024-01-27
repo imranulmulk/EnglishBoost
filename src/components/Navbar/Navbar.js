@@ -41,12 +41,12 @@ const Navbar = () => {
       names: 'Quotes',
       image: require('../../../assets/quote.png'),
     },
-    //     // {
-    //     //   id: 6,
-    //     //   title: "Books",
-    //     //   names: "Books",
-    //     //   image: require("../../assets/Quiz.png"),
-    //     // },
+    {
+      id: 7,
+      title: 'Stories',
+      names: 'Stories',
+      image: require('../../../assets/partOfspeech.png'),
+    },
     {
       id: 8,
       title: 'Quiz',
