@@ -76,7 +76,7 @@ export default function Stories({navigation}) {
                 style={{
                   marginTop: 20,
                   fontWeight: 'bold',
-                  color: 'black',
+                  color: '#004aad',
                   textAlign: 'center',
                 }}>
                 {item.name}
