@@ -12,6 +12,7 @@ import Videos from '../components/contents/AllVideos/Videos';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../../Styles/WordofTheDay';
 import RecommendedBooks from '../components/contents/Pdfs/Books/RecommendedBooks';
+import RecommendedStories from '../components/contents/Pdfs/Stories/RecommendedStories';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -42,11 +43,16 @@ const HomeScreen = () => {
             <Text style={styles.wText}>Word Of the Day</Text>
           </Pressable>
         </View>
-        <View style={{backgroundColor: 'red'}}>
+        {/* Recommended Books Section */}
+        <View>
           <RecommendedBooks />
         </View>
+        {/* Recommended Stories Section */}
+        <View>
+          <RecommendedStories />
+        </View>
         {/* Videos Section */}
-        <View style={{backgroundColor: 'yellow'}}>
+        <View>
           <Videos />
         </View>
       </ScrollView>
