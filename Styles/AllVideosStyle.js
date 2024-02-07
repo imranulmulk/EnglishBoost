@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#D1F1FF',
     marginBottom: 15,
-    minWidth: 350,
+    width: 350,
     borderRadius: 10,
     overflow: 'hidden',
     // elevation: 9,
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     marginTop: '-30%',
   },
   text: {
-    marginTop: 15,
     fontSize: 15,
     fontWeight: 'bold',
   },

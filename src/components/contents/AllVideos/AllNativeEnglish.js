@@ -38,38 +38,31 @@ const AllNativeEnglish = () => {
 
   return (
     <View style={{flex: 1, alignItems: 'center', backgroundColor: '#fff'}}>
-      <View
-        style={{
-          flex: 1,
-          width: '95%',
-          alignItems: 'center',
-        }}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>English With Natives</Text>
-        </View>
-        {loading ? (
-          <Loader loadingText="Loading Videos..." />
-        ) : (
-          <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-            {youtubeVideos.map(item => (
-              <View key={item.key} style={styles.videoContainer}>
-                <YoutubePlayer
-                  height={300}
-                  videoId={item.videoId}
-                  play={false}
-                  style={styles.youtube}
-                  showinfo={false}
-                  modestbranding
-                />
-
-                <View style={styles.titleInfo}>
-                  <Text style={styles.text}>{item.title}</Text>
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-        )}
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>English With Natives</Text>
       </View>
+      {loading ? (
+        <Loader loadingText="Loading Videos..." />
+      ) : (
+        <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+          {youtubeVideos.map(item => (
+            <View key={item.key} style={styles.videoContainer}>
+              <YoutubePlayer
+                height={300}
+                videoId={item.videoId}
+                play={false}
+                style={styles.youtube}
+                showinfo={false}
+                modestbranding
+              />
+
+              <View style={styles.titleInfo}>
+                <Text style={styles.text}>{item.title}</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 };
