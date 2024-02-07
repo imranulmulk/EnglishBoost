@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   JokeBox: {
     backgroundColor: '#D1F1FF',
     width: '100%',
-    height: '50%',
+    minHeight: '50%',
     padding: 10,
     paddingTop: 30,
     borderRadius: 15,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   quoteBox: {
     backgroundColor: '#D1F1FF',
     width: '100%',
-    height: '50%',
+    minHeight: '50%',
     padding: 10,
     paddingTop: 30,
     paddingBottom: 30,
