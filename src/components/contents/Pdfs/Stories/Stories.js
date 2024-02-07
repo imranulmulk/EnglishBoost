@@ -53,7 +53,7 @@ export default function Stories({navigation}) {
                 navigation.navigate('ViewStory', {storyData: item})
               }
               style={{
-                width: 140,
+                width: 145,
                 height: 250,
                 borderWidth: 1,
                 borderColor: '#9fe0fc',
@@ -67,7 +67,7 @@ export default function Stories({navigation}) {
                 style={{
                   // borderRadius: 50,
                   width: '100%',
-                  height: 170,
+                  height: 160,
                   objectFit: 'contain',
                 }}
                 source={{uri: item.imgUrl}}

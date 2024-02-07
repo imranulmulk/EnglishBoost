@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     // backgroundColor: 'red',
-    marginLeft: 180,
+    marginLeft: 165,
   },
   img: {
     width: '100%',

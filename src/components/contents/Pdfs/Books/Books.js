@@ -51,7 +51,7 @@ export default function Books({navigation}) {
             <Pressable
               onPress={() => navigation.navigate('ViewBook', {bookData: item})}
               style={{
-                width: 140,
+                width: 145,
                 height: 250,
                 borderWidth: 1,
                 borderColor: '#9fe0fc',
@@ -65,7 +65,7 @@ export default function Books({navigation}) {
                 style={{
                   // borderRadius: 50,
                   width: '100%',
-                  height: 170,
+                  height: 160,
                   objectFit: 'contain',
                 }}
                 source={{uri: item.imgUrl}}

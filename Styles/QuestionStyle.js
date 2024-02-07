@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
   },
 
   choices: {
-    width: '100%',
-    height: '72%',
+    minWidth: '100%',
+    minHeight: '72%',
     padding: 10,
     backgroundColor: 'white',
     borderRadius: 15,

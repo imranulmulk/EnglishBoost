@@ -43,6 +43,20 @@ const HomeScreen = () => {
             <Text style={styles.wText}>Word Of the Day</Text>
           </Pressable>
         </View>
+        {/* Dictionary Shortcut */}
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop: 10,
+            padding: 10,
+          }}>
+          <Pressable
+            style={styles.wordofday}
+            onPress={() => navigation.navigate('Dictionary')}>
+            <Text style={styles.wText}>Search a Word</Text>
+          </Pressable>
+        </View>
         {/* Recommended Books Section */}
         <View>
           <RecommendedBooks />
