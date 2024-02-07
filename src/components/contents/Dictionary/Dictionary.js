@@ -111,6 +111,7 @@ const Dictionary = () => {
             placeholder="Search..."
             value={word}
             style={styles.searchbar}
+            onSubmitEditing={handleSearch}
           />
           <Pressable style={styles.searchBtn} onPress={handleSearch}>
             <Icon name="search-outline" size={30} color="#fff" />

@@ -23,7 +23,7 @@ const HomeScreen = () => {
         // justifyContent: 'center',
         backgroundColor: '#fff',
       }}>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <StatusBar backgroundColor="#0079FF" />
         {/* Navbar Section */}
         <View>
