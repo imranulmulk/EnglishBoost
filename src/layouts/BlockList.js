@@ -1,29 +1,31 @@
-import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 
-const BlockList = ({ item ,image}) => {
+const BlockList = ({item, image}) => {
   // console.log(image)
   // const [isContentVisible, setContentVisible] = useState(false);
   // const [isSubContentVisible, setSubContentVisible] = useState(false);
 
   return (
-    <View style={{ marginBottom: 10 }}>
+    <View style={{marginBottom: 10}}>
       <View
         style={{
           paddingTop: 10,
           paddingBottom: 10,
           paddingLeft: 13,
           paddingRight: 13,
-          flexDirection: "row",
-          alignItems: "center",
+          flexDirection: 'row',
+          alignItems: 'center',
         }}
         // onPress={() => setContentVisible(!isContentVisible)}
       >
         <Image
           source={image}
-          style={{ marginRight: 10,width:60,height:60 }}
+          style={{marginRight: 10, width: 60, height: 60}}
         />
-        <Text style={{ fontSize: 17, fontWeight: "bold", color:'#004fd7' }}>{item.title}</Text>
+        <Text style={{fontSize: 17, fontWeight: 'bold', color: '#004fd7'}}>
+          {item.title}
+        </Text>
       </View>
 
       {/* {sContentVisible && (
@@ -61,12 +63,11 @@ const BlockList = ({ item ,image}) => {
       <View
         style={{
           height: 1,
-          width: "93%",
-          backgroundColor: "lightgray",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      ></View>
+          width: '93%',
+          backgroundColor: 'lightgray',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}></View>
     </View>
   );
 };
