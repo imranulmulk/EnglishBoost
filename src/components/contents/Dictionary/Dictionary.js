@@ -2,14 +2,16 @@ import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Searchbar} from 'react-native-paper';
-
 import Icon from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
+import DictionarySkeleton from '../../../layouts/DictionarySkeleton';
+import InternetCheck from '../../../layouts/InternetCheck';
 
 const Dictionary = () => {
   const [word, setWord] = useState('');
   const [dictionaryData, setDictionaryData] = useState([]);
   const [audio, setAudio] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const extractData = entry => {
     const firstMeaning = entry.meanings.length >= 1 ? entry.meanings[0] : null;
@@ -32,6 +34,7 @@ const Dictionary = () => {
 
   const dictionaryApi = async () => {
     try {
+      setLoading(true);
       const results = await axios.get(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
       );
@@ -54,6 +57,7 @@ const Dictionary = () => {
         // Handle when no data is returned
         setDictionaryData([]);
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -87,12 +91,18 @@ const Dictionary = () => {
   };
 
   const handleSearch = () => {
+    // Clear previous details
+    setDictionaryData([]);
+    if (audio) {
+      audio.release();
+    }
+    setAudio(null);
+
     dictionaryApi();
     setWord('');
   };
 
   useEffect(() => {
-    handleSearch();
     return () => {
       // Cleanup function
       if (audio) {
@@ -102,35 +112,36 @@ const Dictionary = () => {
   }, [dictionaryData]);
 
   return (
-    <View style={styles.mainWrapper}>
-      <View style={styles.innerWrapper}>
-        {/* searchbar */}
-        <View style={styles.searchSection}>
-          <Searchbar
-            onChangeText={text => setWord(text)}
-            placeholder="Search..."
-            value={word}
-            style={styles.searchbar}
-            onSubmitEditing={handleSearch}
-          />
-          <Pressable style={styles.searchBtn} onPress={handleSearch}>
-            <Icon name="search-outline" size={30} color="#fff" />
-          </Pressable>
-        </View>
+    <InternetCheck>
+      <View style={styles.mainWrapper}>
+        <View style={styles.innerWrapper}>
+          {/* searchbar */}
+          <View style={styles.searchSection}>
+            <Searchbar
+              onChangeText={text => setWord(text)}
+              placeholder="Search..."
+              value={word}
+              style={styles.searchbar}
+              onSubmitEditing={handleSearch}
+            />
+            <Pressable style={styles.searchBtn} onPress={handleSearch}>
+              <Icon name="search-outline" size={30} color="#fff" />
+            </Pressable>
+          </View>
+          {loading && <DictionarySkeleton />}
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {dictionaryData.map((entry, ind) => (
+              <View key={ind}>
+                {/* Word Section */}
+                <View style={styles.wordSection}>
+                  <Text style={styles.word}>{entry.word}</Text>
+                  <Pressable style={styles.speakBtn} onPress={playAudio}>
+                    <Icon name="volume-high" size={40} color="#0079FF" />
+                  </Pressable>
+                </View>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {dictionaryData.map((entry, ind) => (
-            <View key={ind}>
-              {/* Word Section */}
-              <View style={styles.wordSection}>
-                <Text style={styles.word}>{entry.word}</Text>
-                <Pressable style={styles.speakBtn} onPress={playAudio}>
-                  <Icon name="volume-high" size={40} color="#0079FF" />
-                </Pressable>
-              </View>
-
-              {/* Meaning Section */}
-              {/* <View style={styles.section}>
+                {/* Meaning Section */}
+                {/* <View style={styles.section}>
                 {entry.meanings.map((meaning, meaningIndex) => (
                   <View key={meaningIndex}>
                     {meaning.partOfSpeech && (
@@ -142,66 +153,67 @@ const Dictionary = () => {
                 ))}
               </View> */}
 
-              {/* Definition Section */}
-              <View style={styles.section}>
-                <Text
-                  style={{
-                    color: '#0079FF',
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                  }}>
-                  Definitions:
-                </Text>
-                {entry.meanings.map((meaning, meaningIndex) => (
-                  <View key={meaningIndex}>
-                    {meaning.definitions &&
-                      meaning.definitions
-                        .slice(0, 5)
-                        .map((definition, definitionIndex) => (
-                          <View key={definitionIndex}>
-                            {definition.definition && (
-                              <Text style={styles.definition}>
-                                ● {definition.definition}
-                              </Text>
-                            )}
-                          </View>
-                        ))}
-                  </View>
-                ))}
-              </View>
+                {/* Definition Section */}
+                <View style={styles.section}>
+                  <Text
+                    style={{
+                      color: '#0079FF',
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                    }}>
+                    Definitions:
+                  </Text>
+                  {entry.meanings.map((meaning, meaningIndex) => (
+                    <View key={meaningIndex}>
+                      {meaning.definitions &&
+                        meaning.definitions
+                          .slice(0, 5)
+                          .map((definition, definitionIndex) => (
+                            <View key={definitionIndex}>
+                              {definition.definition && (
+                                <Text style={styles.definition}>
+                                  ● {definition.definition}
+                                </Text>
+                              )}
+                            </View>
+                          ))}
+                    </View>
+                  ))}
+                </View>
 
-              {/* Example Section */}
-              <View style={styles.section}>
-                <Text
-                  style={{
-                    color: '#0079FF',
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                  }}>
-                  Examples:
-                </Text>
-                {entry.meanings.map((meaning, meaningIndex) => (
-                  <View key={meaningIndex}>
-                    {meaning.definitions &&
-                      meaning.definitions
-                        .slice(0, 5)
-                        .map((definition, definitionIndex) => (
-                          <View key={definitionIndex}>
-                            {definition.example && (
-                              <Text style={styles.example}>
-                                ● {definition.example}
-                              </Text>
-                            )}
-                          </View>
-                        ))}
-                  </View>
-                ))}
+                {/* Example Section */}
+                <View style={styles.section}>
+                  <Text
+                    style={{
+                      color: '#0079FF',
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                    }}>
+                    Examples:
+                  </Text>
+                  {entry.meanings.map((meaning, meaningIndex) => (
+                    <View key={meaningIndex}>
+                      {meaning.definitions &&
+                        meaning.definitions
+                          .slice(0, 5)
+                          .map((definition, definitionIndex) => (
+                            <View key={definitionIndex}>
+                              {definition.example && (
+                                <Text style={styles.example}>
+                                  ● {definition.example}
+                                </Text>
+                              )}
+                            </View>
+                          ))}
+                    </View>
+                  ))}
+                </View>
               </View>
-            </View>
-          ))}
-        </ScrollView>
+            ))}
+          </ScrollView>
+        </View>
       </View>
-    </View>
+    </InternetCheck>
   );
 };
 
