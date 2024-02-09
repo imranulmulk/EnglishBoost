@@ -1,17 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Pressable,
-  Image,
-} from 'react-native';
-
+import {View, Text, StyleSheet, FlatList, Pressable, Image} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useNavigation} from '@react-navigation/native';
 import {firebase} from '../../../../firebase/config';
-import Loader from '../../../layouts/Loader';
+import RecomVideosSkeleton from '../../../layouts/RecomVideosSkeleton';
 const Videos = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const youtubeRef = firebase.firestore().collection('youtube');
@@ -62,12 +54,16 @@ const Videos = () => {
     <View style={styles.videoWrapper}>
       <Text style={styles.title}>Recommended Videos</Text>
       {loading ? (
-        <Loader loadingText="Loading Videos..." />
+        <RecomVideosSkeleton />
       ) : (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {youtubeVideos.map(item => (
-            <View key={item.key} style={styles.videoContainer}>
-              {item.token ? ( // Conditional rendering based on the token value
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={youtubeVideos}
+          keyExtractor={item => item.key}
+          renderItem={({item}) => (
+            <View style={styles.videoContainer}>
+              {item.token ? (
                 <YoutubePlayer
                   height={300}
                   videoId={item.videoId}
@@ -93,8 +89,8 @@ const Videos = () => {
                 <Text style={styles.text}>{item.title}</Text>
               </View>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
       )}
     </View>
   );

@@ -1,7 +1,7 @@
 import {View, Text, FlatList, Image, Pressable} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {firebase} from '../../../../../firebase/config';
-import Loader from '../../../../layouts/Loader';
+import PdfSkeleton from '../../../../layouts/PdfSkeleton';
 
 export default function Stories({navigation}) {
   const [storiesData, setStoriesData] = useState([]);
@@ -36,7 +36,7 @@ export default function Stories({navigation}) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       {loading ? (
-        <Loader loadingText="Loading Stories..." />
+        <PdfSkeleton />
       ) : (
         <FlatList
           contentContainerStyle={{

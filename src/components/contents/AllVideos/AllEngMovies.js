@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import styles from '../../../../Styles/AllVideosStyle';
 import {firebase} from '../../../../firebase/config';
-import Loader from '../../../layouts/Loader';
+import AllVideosSkeleton from '../../../layouts/AllVideosSkeleton';
 const AllEngMovies = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const youtubeRef = firebase.firestore().collection('movies');
@@ -41,12 +41,17 @@ const AllEngMovies = () => {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>English With Movies</Text>
       </View>
+
       {loading ? (
-        <Loader loadingText="Loading Videos..." />
+        <AllVideosSkeleton />
       ) : (
-        <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-          {youtubeVideos.map(item => (
-            <View key={item.key} style={styles.videoContainer}>
+        <FlatList
+          style={{flex: 1}}
+          showsVerticalScrollIndicator={false}
+          data={youtubeVideos}
+          keyExtractor={item => item.key}
+          renderItem={({item}) => (
+            <View style={styles.videoContainer}>
               <YoutubePlayer
                 height={300}
                 videoId={item.videoId}
@@ -60,8 +65,8 @@ const AllEngMovies = () => {
                 <Text style={styles.text}>{item.title}</Text>
               </View>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
       )}
     </View>
   );

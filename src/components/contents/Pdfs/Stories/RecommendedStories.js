@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, Pressable} from 'react-native';
 import {firebase} from '../../../../../firebase/config';
-import Loader from '../../../../layouts/Loader';
 import {useNavigation} from '@react-navigation/native';
+import RecommendedPdfSkeleton from '../../../../layouts/RecommendedPdfSkeleton';
 
 const RecommendedStories = () => {
   const [recommendedStoriesData, setRecommendedStoriesData] = useState([]);
@@ -59,7 +59,7 @@ const RecommendedStories = () => {
         Recommended Stories
       </Text>
       {loading ? (
-        <Loader loadingText="Loading Recommended Stories..." />
+        <RecommendedPdfSkeleton />
       ) : (
         <FlatList
           contentContainerStyle={{
