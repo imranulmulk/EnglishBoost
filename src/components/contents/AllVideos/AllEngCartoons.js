@@ -4,6 +4,8 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import styles from '../../../../Styles/AllVideosStyle';
 import {firebase} from '../../../../firebase/config';
 import AllVideosSkeleton from '../../../layouts/AllVideosSkeleton';
+import InternetCheck from '../../../layouts/InternetCheck';
+
 const AllEngCartoons = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const youtubeRef = firebase.firestore().collection('cartoons');
@@ -37,37 +39,39 @@ const AllEngCartoons = () => {
   }, []);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', backgroundColor: '#fff'}}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>English With Cartoons</Text>
-      </View>
-      {loading ? (
-        <AllVideosSkeleton />
-      ) : (
-        <FlatList
-          style={{flex: 1}}
-          showsVerticalScrollIndicator={false}
-          data={youtubeVideos}
-          keyExtractor={item => item.key}
-          renderItem={({item}) => (
-            <View style={styles.videoContainer}>
-              <YoutubePlayer
-                height={300}
-                videoId={item.videoId}
-                play={false}
-                style={styles.youtube}
-                showinfo={false}
-                modestbranding
-              />
+    <InternetCheck>
+      <View style={{flex: 1, alignItems: 'center', backgroundColor: '#fff'}}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>English With Cartoons</Text>
+        </View>
+        {loading ? (
+          <AllVideosSkeleton />
+        ) : (
+          <FlatList
+            style={{flex: 1}}
+            showsVerticalScrollIndicator={false}
+            data={youtubeVideos}
+            keyExtractor={item => item.key}
+            renderItem={({item}) => (
+              <View style={styles.videoContainer}>
+                <YoutubePlayer
+                  height={300}
+                  videoId={item.videoId}
+                  play={false}
+                  style={styles.youtube}
+                  showinfo={false}
+                  modestbranding
+                />
 
-              <View style={styles.titleInfo}>
-                <Text style={styles.text}>{item.title}</Text>
+                <View style={styles.titleInfo}>
+                  <Text style={styles.text}>{item.title}</Text>
+                </View>
               </View>
-            </View>
-          )}
-        />
-      )}
-    </View>
+            )}
+          />
+        )}
+      </View>
+    </InternetCheck>
   );
 };
 
