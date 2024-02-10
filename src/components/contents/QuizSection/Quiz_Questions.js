@@ -149,7 +149,7 @@ const Quiz_Questions = ({route}) => {
         </View>
         {/* ---------------------next button----------------- */}
         {showNextBtn && (
-          <View style={{marginTop: 'auto'}}>
+          <View style={{marginTop: 50}}>
             <TouchableOpacity onPress={handleNext} style={styles.nextbtn}>
               <Text style={styles.btnText}>Next</Text>
             </TouchableOpacity>

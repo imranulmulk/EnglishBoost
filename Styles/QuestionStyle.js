@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
   },
 
   choices: {
-    minWidth: '100%',
-    minHeight: '72%',
+    flex: 1,
+    width: '100%',
     padding: 10,
     backgroundColor: 'white',
     borderRadius: 15,
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#005eff',
     justifyContent: 'center',
     alignItems: 'center',
+    // marginBottom: 15,
   },
   btnText: {
     color: 'white',
