@@ -1,18 +1,12 @@
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import React, {useState, useEffect} from 'react';
-// import QuizQuesData from "./QuizQuesData";
 import styles from '../../../../Styles/QuestionStyle';
 import {ProgressBar} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import {BackHandler} from 'react-native';
 
 const Quiz_Questions = ({route}) => {
   const navigation = useNavigation();
@@ -74,6 +68,19 @@ const Quiz_Questions = ({route}) => {
       setisDisabledOption(false);
     }
   };
+  // Main Section navigation
+  useEffect(() => {
+    const backHandler = () => {
+      // Navigate to the main quiz page when back button is pressed
+      navigation.replace('Quiz');
+      return true;
+    };
+    const backHandlerSubscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backHandler,
+    );
+    return () => backHandlerSubscription.remove();
+  }, [navigation]);
 
   return (
     <View style={styles.Wrapper}>
