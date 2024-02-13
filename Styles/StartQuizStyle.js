@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
   },
   //   ---------UPPER SECTION-------
   upperSection: {
-    height: '55%',
+    // height: '55%',
     margin: 10,
   },
   // ----------LOWER SECTION--------
   lowerSection: {
-    height: '45%',
+    // height: '45%',
     backgroundColor: 'white',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -22,20 +22,17 @@ const styles = StyleSheet.create({
   },
   //   -------UPPER SECTION IMAGE WRAPPER---
   imageWrapper: {
-    width: 200,
-    height: 200,
+    width: '100%',
+    height: 180,
     // backgroundColor: 'red',
-    marginLeft: 165,
+    alignItems: 'flex-end',
   },
   img: {
-    width: '100%',
-    height: '100%',
+    width: 170,
+    height: 170,
     objectFit: 'contain',
   },
 
-  headingSection: {
-    marginLeft: 10,
-  },
   //   --------------PLAY BUTTON------------
   playbtn: {
     width: '100%',
@@ -52,24 +49,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'white',
-  },
-
-  img2: {
-    width: '100%',
-    height: '100%',
-    marginLeft: 20,
-  },
-  //   ---------BACK BUTTON
-  backbtn: {
-    width: 70,
-    height: 30,
-    borderColor: 'white',
-    borderRadius: 10,
-    // marginTop: 40,
-    marginLeft: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
   },
   backtxt: {
     color: 'white',

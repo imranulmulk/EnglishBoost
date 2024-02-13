@@ -8,9 +8,10 @@ const styles = StyleSheet.create({
   },
   questionsWrapper: {
     width: '100%',
-    padding: 10,
+    marginBottom: 10,
+    // padding: 10,
     // backgroundColor: 'green',
-    borderRadius: 30,
+    // borderRadius: 30,
   },
   questiontext: {
     fontSize: 18,
@@ -22,7 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     padding: 10,
-    backgroundColor: 'white',
     borderRadius: 15,
     backgroundColor: '#D1F1FF',
   },

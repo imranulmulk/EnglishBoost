@@ -40,10 +40,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   imageContainer: {
-    backgroundColor: 'pink',
-    marginTop: 10,
-    width: 180,
-    height: 180,
+    width: 145,
+    height: 145,
   },
   image: {
     width: '100%',

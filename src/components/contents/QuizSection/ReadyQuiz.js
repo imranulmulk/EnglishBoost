@@ -23,7 +23,7 @@ const ReadyQuiz = ({route}) => {
             source={require('../../../../assets/startQuiz.png')}
           />
         </View>
-        <View style={styles.headingSection}>
+        <View>
           <Text style={{color: '#0079FF', fontSize: 45, fontWeight: 'bold'}}>
             Super Quiz
           </Text>
