@@ -46,9 +46,9 @@ function AppNavigation() {
           headerTintColor: '#fff',
           // headerShown: false,
         }}
-        initialRouteName="Home">
+        initialRouteName="EnglishBoost">
         {/* All Navigations */}
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="EnglishBoost" component={HomeScreen} />
         <Stack.Screen name="Navbar" component={Navbar} />
         <Stack.Screen name="AllTenses" component={AllTenses} />
         <Stack.Screen name="Tense" component={Tense} />

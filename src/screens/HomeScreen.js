@@ -6,15 +6,21 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Videos from '../components/contents/AllVideos/Videos';
 import {useNavigation} from '@react-navigation/native';
 import styles from '../../Styles/WordofTheDay';
 import RecommendedBooks from '../components/contents/Pdfs/Books/RecommendedBooks';
 import RecommendedStories from '../components/contents/Pdfs/Stories/RecommendedStories';
+import SplashScreen from 'react-native-splash-screen';
 
 const HomeScreen = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 500);
+  }, []);
   const navigation = useNavigation();
   return (
     <SafeAreaView
