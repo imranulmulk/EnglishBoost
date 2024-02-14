@@ -72,7 +72,7 @@ const Quiz_Questions = ({route}) => {
   useEffect(() => {
     const backHandler = () => {
       // Navigate to the main quiz page when back button is pressed
-      navigation.replace('Quiz');
+      navigation.navigate('Quiz');
       return true;
     };
     const backHandlerSubscription = BackHandler.addEventListener(
