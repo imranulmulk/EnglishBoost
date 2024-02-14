@@ -17,9 +17,7 @@ import SplashScreen from 'react-native-splash-screen';
 
 const HomeScreen = () => {
   useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 500);
+    SplashScreen.hide();
   }, []);
   const navigation = useNavigation();
   return (
