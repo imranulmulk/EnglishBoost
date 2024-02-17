@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 // import apron from "../../../assets/Vocabulary/apron.png"
 import ImagesData from './VocabularyData/kitchen/Data';
 import Fruits from './VocabularyData/Fruits';
@@ -19,6 +19,17 @@ import Birds from './VocabularyData/Birds';
 import Insects from './VocabularyData/Insects';
 import Occupations from './VocabularyData/Occupations';
 import {useNavigation} from '@react-navigation/native';
+import {
+  RewardedAd,
+  RewardedAdEventType,
+  TestIds,
+} from 'react-native-google-mobile-ads';
+
+const adUnitId = TestIds.REWARDED;
+const rewarded = RewardedAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
 const VocabularyScreen = () => {
   // console.log(ImagesData);
   const Data = [
@@ -96,6 +107,31 @@ const VocabularyScreen = () => {
       ImagesData: Birds,
     },
   ];
+
+  // Ad Show
+  useEffect(() => {
+    const unsubscribeLoaded = rewarded.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        rewarded.show();
+      },
+    );
+    const unsubscribeEarned = rewarded.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log('User earned reward of ', reward);
+      },
+    );
+
+    // Start loading the rewarded ad straight away
+    rewarded.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+    };
+  }, []);
   const navigation = useNavigation();
   return (
     <>

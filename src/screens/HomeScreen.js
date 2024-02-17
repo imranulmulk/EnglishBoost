@@ -6,7 +6,7 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Videos from '../components/contents/AllVideos/Videos';
 import {useNavigation} from '@react-navigation/native';
@@ -14,11 +14,53 @@ import styles from '../../Styles/WordofTheDay';
 import RecommendedBooks from '../components/contents/Pdfs/Books/RecommendedBooks';
 import RecommendedStories from '../components/contents/Pdfs/Stories/RecommendedStories';
 import SplashScreen from 'react-native-splash-screen';
+import BannerAdComponent from '../Google Ads/BannerAdComponent';
+import InterstitialAdComponent from '../Google Ads/InterstitialAdComponent';
+// import RewardedAdComponent from '../Google Ads/RewardedAdComponent';
 
 const HomeScreen = () => {
+  // const [adShown, setAdShown] = useState(false);
+  // const {showAd, loaded} = InterstitialAdComponent();
+  // const {showRewardedAd, loaded2} = RewardedAdComponent();
+
+  // logic for displaying the ad first the the actual component
+  // const handleSearchWordPress = async () => {
+  //   if (loaded) {
+  //     if (!adShown) {
+  //       await showAd(); // Call showAd on the instance
+  //       setAdShown(true);
+  //     }
+  //     navigation.navigate('Dictionary');
+  //   } else {
+  //     console.warn('Interstitial ad not loaded yet. Cannot show.');
+  //   }
+  // };
+
+  // const handlePress = async () => {
+  //   if (loaded2) {
+  //     await showRewardedAd();
+  //     navigation.navigate('WordOfTheDay');
+  //   } else {
+  //     console.warn('Rewarded ad not loaded yet. Cannot show.');
+  //     // Navigate to 'WordOfTheDay' directly without showing the ad
+  //     navigation.navigate('WordOfTheDay');
+  //   }
+  //   // corrected
+  //   if (loaded2) {
+  //     if (!adShown) {
+  //       await showRewardedAd();
+  //       setAdShown(true);
+  //     }
+  //     navigation.navigate('WordOfTheDay');
+  //   } else {
+  //     console.warn('Interstitial ad not loaded yet. Cannot show.');
+  //   }
+  // };
+
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
   const navigation = useNavigation();
   return (
     <SafeAreaView
@@ -27,6 +69,7 @@ const HomeScreen = () => {
         // justifyContent: 'center',
         backgroundColor: '#fff',
       }}>
+      <BannerAdComponent />
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <StatusBar backgroundColor="#0079FF" />
         {/* Navbar Section */}

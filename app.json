@@ -1,4 +1,7 @@
 {
   "name": "EnglishBoost",
-  "displayName": "EnglishBoost"
+  "displayName": "EnglishBoost",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-7435937318786260~1863748951"
+  }
 }

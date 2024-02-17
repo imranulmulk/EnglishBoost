@@ -6,6 +6,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 import DictionarySkeleton from '../../../layouts/DictionarySkeleton';
 import InternetCheck from '../../../layouts/InternetCheck';
+import BannerAdComponent from '../../../Google Ads/BannerAdComponent';
+import {
+  InterstitialAd,
+  TestIds,
+  AdEventType,
+} from 'react-native-google-mobile-ads';
+
+const adUnitId = TestIds.INTERSTITIAL;
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
 
 const Dictionary = () => {
   const [word, setWord] = useState('');
@@ -111,6 +123,20 @@ const Dictionary = () => {
     };
   }, [dictionaryData]);
 
+  // Ad Show----------------
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        interstitial.show();
+      },
+    );
+    // Start loading the interstitial straight away
+    interstitial.load();
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, []);
+
   return (
     <InternetCheck>
       <View style={styles.mainWrapper}>
@@ -211,6 +237,7 @@ const Dictionary = () => {
               </View>
             ))}
           </ScrollView>
+          <BannerAdComponent />
         </View>
       </View>
     </InternetCheck>
