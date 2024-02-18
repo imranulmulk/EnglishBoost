@@ -3,6 +3,17 @@ import React, {useEffect, useState} from 'react';
 import {firebase} from '../../../../../firebase/config';
 import PdfSkeleton from '../../../../layouts/PdfSkeleton';
 import InternetCheck from '../../../../layouts/InternetCheck';
+import {
+  InterstitialAd,
+  TestIds,
+  AdEventType,
+} from 'react-native-google-mobile-ads';
+
+const adUnitId = TestIds.INTERSTITIAL;
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
 
 export default function Stories({navigation}) {
   const [storiesData, setStoriesData] = useState([]);
@@ -32,6 +43,20 @@ export default function Stories({navigation}) {
     };
 
     fetchData();
+  }, []);
+
+  // Show Ad
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        interstitial.show();
+      },
+    );
+    // Start loading the interstitial straight away
+    interstitial.load();
+    // Unsubscribe from events on unmount
+    return unsubscribe;
   }, []);
 
   return (

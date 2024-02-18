@@ -15,7 +15,7 @@ import RecommendedBooks from '../components/contents/Pdfs/Books/RecommendedBooks
 import RecommendedStories from '../components/contents/Pdfs/Stories/RecommendedStories';
 import SplashScreen from 'react-native-splash-screen';
 import BannerAdComponent from '../Google Ads/BannerAdComponent';
-import InterstitialAdComponent from '../Google Ads/InterstitialAdComponent';
+// import InterstitialAdComponent from '../Google Ads/InterstitialAdComponent';
 // import RewardedAdComponent from '../Google Ads/RewardedAdComponent';
 
 const HomeScreen = () => {
