@@ -8,6 +8,8 @@ import DictionarySkeleton from '../../../layouts/DictionarySkeleton';
 import InternetCheck from '../../../layouts/InternetCheck';
 import BannerAdComponent from '../../../Google Ads/BannerAdComponent';
 import {
+  BannerAd,
+  BannerAdSize,
   InterstitialAd,
   TestIds,
   AdEventType,
@@ -24,6 +26,23 @@ const Dictionary = () => {
   const [dictionaryData, setDictionaryData] = useState([]);
   const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false); //for Ad
+
+  // popup ad
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setLoaded(true);
+        interstitial.show();
+      },
+    );
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, []);
 
   const extractData = entry => {
     const firstMeaning = entry.meanings.length >= 1 ? entry.meanings[0] : null;
@@ -122,20 +141,6 @@ const Dictionary = () => {
       }
     };
   }, [dictionaryData]);
-
-  // Ad Show----------------
-  useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        interstitial.show();
-      },
-    );
-    // Start loading the interstitial straight away
-    interstitial.load();
-    // Unsubscribe from events on unmount
-    return unsubscribe;
-  }, []);
 
   return (
     <InternetCheck>

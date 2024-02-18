@@ -19,6 +19,22 @@ export default function Books({navigation}) {
   const [booksData, setBooksData] = useState([]);
   const booksRef = firebase.firestore().collection('books');
   const [loading, setLoading] = useState(true); //for loader
+  const [loaded, setLoaded] = useState(false); //for Ad
+
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setLoaded(true);
+        interstitial.show();
+      },
+    );
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,20 +59,6 @@ export default function Books({navigation}) {
     };
 
     fetchData();
-  }, []);
-
-  // Show Ad
-  useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        interstitial.show();
-      },
-    );
-    // Start loading the interstitial straight away
-    interstitial.load();
-    // Unsubscribe from events on unmount
-    return unsubscribe;
   }, []);
   return (
     <InternetCheck>

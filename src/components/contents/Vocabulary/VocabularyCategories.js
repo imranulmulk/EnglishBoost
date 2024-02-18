@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 // import apron from "../../../assets/Vocabulary/apron.png"
 import ImagesData from './VocabularyData/kitchen/Data';
 import Fruits from './VocabularyData/Fruits';
@@ -31,6 +31,33 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: ['fashion', 'clothing'],
 });
 const VocabularyScreen = () => {
+  const [loaded, setLoaded] = useState(false); //for ad
+
+  // Ad Show
+  useEffect(() => {
+    const unsubscribeLoaded = rewarded.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        setLoaded(true);
+        rewarded.show();
+      },
+    );
+    const unsubscribeEarned = rewarded.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log('User earned reward of ', reward);
+      },
+    );
+
+    // Start loading the rewarded ad straight away
+    rewarded.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeEarned();
+    };
+  }, []);
   // console.log(ImagesData);
   const Data = [
     {
@@ -107,31 +134,6 @@ const VocabularyScreen = () => {
       ImagesData: Birds,
     },
   ];
-
-  // Ad Show
-  useEffect(() => {
-    const unsubscribeLoaded = rewarded.addAdEventListener(
-      RewardedAdEventType.LOADED,
-      () => {
-        rewarded.show();
-      },
-    );
-    const unsubscribeEarned = rewarded.addAdEventListener(
-      RewardedAdEventType.EARNED_REWARD,
-      reward => {
-        console.log('User earned reward of ', reward);
-      },
-    );
-
-    // Start loading the rewarded ad straight away
-    rewarded.load();
-
-    // Unsubscribe from events on unmount
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeEarned();
-    };
-  }, []);
   const navigation = useNavigation();
   return (
     <>
