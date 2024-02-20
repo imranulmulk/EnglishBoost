@@ -6,8 +6,10 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import words from './wordsData';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Tts from 'react-native-tts';
 
 const WordOfTheDay = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -78,6 +80,10 @@ const WordOfTheDay = () => {
 
   const currentWord = words[currentIndex];
 
+  const speakWord = () => {
+    Tts.speak(currentWord.word);
+  };
+
   return (
     <View style={{flex: 1, alignItems: 'center', backgroundColor: '#fff'}}>
       <View style={styles.container}>
@@ -87,6 +93,11 @@ const WordOfTheDay = () => {
             <Text style={{fontSize: 13}}>Next in:</Text>
             <Text style={styles.timer}>{formatTime(timer)}</Text>
           </View>
+        </View>
+        <View style={styles.speakBtn}>
+          <Pressable onPress={speakWord}>
+            <Icon name="volume-high" size={50} color="#0079FF" />
+          </Pressable>
         </View>
         <View style={styles.meaningContainer}>
           <Text style={styles.meaningContainerHeadingText}>Meaning:</Text>
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
   word: {
     fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 20,
+    // marginBottom: 20,
     color: '#0079FF',
   },
   wordContainer: {
@@ -136,7 +147,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: '100%',
+    // marginBottom: 10,
+  },
+  speakBtn: {
+    alignItems: 'flex-start',
+    // backgroundColor: 'red',
+    width: '100%',
     marginBottom: 10,
+    marginTop: 10,
   },
   timerContainer: {
     alignItems: 'center',

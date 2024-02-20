@@ -3,38 +3,38 @@ import React, {useEffect, useState} from 'react';
 import {firebase} from '../../../../../firebase/config';
 import PdfSkeleton from '../../../../layouts/PdfSkeleton';
 import InternetCheck from '../../../../layouts/InternetCheck';
-import {
-  InterstitialAd,
-  TestIds,
-  AdEventType,
-} from 'react-native-google-mobile-ads';
+// import {
+//   InterstitialAd,
+//   TestIds,
+//   AdEventType,
+// } from 'react-native-google-mobile-ads';
 
-const adUnitId = TestIds.INTERSTITIAL;
-const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-  requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
-});
+// const adUnitId = TestIds.INTERSTITIAL;
+// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+//   requestNonPersonalizedAdsOnly: true,
+//   keywords: ['fashion', 'clothing'],
+// });
 
 export default function Books({navigation}) {
   const [booksData, setBooksData] = useState([]);
   const booksRef = firebase.firestore().collection('books');
   const [loading, setLoading] = useState(true); //for loader
-  const [loaded, setLoaded] = useState(false); //for Ad
+  // const [loaded, setLoaded] = useState(false); //for Ad
 
-  useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        setLoaded(true);
-        interstitial.show();
-      },
-    );
-    // Start loading the interstitial straight away
-    interstitial.load();
+  // useEffect(() => {
+  //   const unsubscribe = interstitial.addAdEventListener(
+  //     AdEventType.LOADED,
+  //     () => {
+  //       setLoaded(true);
+  //       interstitial.show();
+  //     },
+  //   );
+  //   // Start loading the interstitial straight away
+  //   interstitial.load();
 
-    // Unsubscribe from events on unmount
-    return unsubscribe;
-  }, []);
+  //   // Unsubscribe from events on unmount
+  //   return unsubscribe;
+  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {

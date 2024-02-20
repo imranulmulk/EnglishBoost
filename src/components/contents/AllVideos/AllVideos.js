@@ -1,7 +1,7 @@
 import {View, Text, FlatList, Pressable, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import BannerAdComponent from '../../../Google Ads/BannerAdComponent';
+// import BannerAdComponent from '../../../Google Ads/BannerAdComponent';
 
 const AllVideos = () => {
   const allCategories = [
@@ -63,7 +63,7 @@ const AllVideos = () => {
         keyExtractor={item => item.id.toString()}
         renderItem={renderCategoryButton}
       />
-      <BannerAdComponent />
+      {/* <BannerAdComponent /> */}
     </View>
   );
 };

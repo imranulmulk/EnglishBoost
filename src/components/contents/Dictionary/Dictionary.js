@@ -3,46 +3,45 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Searchbar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Sound from 'react-native-sound';
 import DictionarySkeleton from '../../../layouts/DictionarySkeleton';
 import InternetCheck from '../../../layouts/InternetCheck';
-import BannerAdComponent from '../../../Google Ads/BannerAdComponent';
-import {
-  BannerAd,
-  BannerAdSize,
-  InterstitialAd,
-  TestIds,
-  AdEventType,
-} from 'react-native-google-mobile-ads';
+import Tts from 'react-native-tts';
+// import BannerAdComponent from '../../../Google Ads/BannerAdComponent';
+// import {
+//   BannerAd,
+//   BannerAdSize,
+//   InterstitialAd,
+//   TestIds,
+//   AdEventType,
+// } from 'react-native-google-mobile-ads';
 
-const adUnitId = TestIds.INTERSTITIAL;
-const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-  requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
-});
+// const adUnitId = TestIds.INTERSTITIAL;
+// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+//   requestNonPersonalizedAdsOnly: true,
+//   keywords: ['fashion', 'clothing'],
+// });
 
 const Dictionary = () => {
   const [word, setWord] = useState('');
   const [dictionaryData, setDictionaryData] = useState([]);
-  const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [loaded, setLoaded] = useState(false); //for Ad
+  // const [loaded, setLoaded] = useState(false); //for Ad
 
   // popup ad
-  useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        setLoaded(true);
-        interstitial.show();
-      },
-    );
-    // Start loading the interstitial straight away
-    interstitial.load();
+  // useEffect(() => {
+  //   const unsubscribe = interstitial.addAdEventListener(
+  //     AdEventType.LOADED,
+  //     () => {
+  //       setLoaded(true);
+  //       interstitial.show();
+  //     },
+  //   );
+  //   // Start loading the interstitial straight away
+  //   interstitial.load();
 
-    // Unsubscribe from events on unmount
-    return unsubscribe;
-  }, []);
+  //   // Unsubscribe from events on unmount
+  //   return unsubscribe;
+  // }, []);
 
   const extractData = entry => {
     const firstMeaning = entry.meanings.length >= 1 ? entry.meanings[0] : null;
@@ -73,17 +72,6 @@ const Dictionary = () => {
         const entry = results.data[0];
         const extractedData = extractData(entry);
         setDictionaryData([extractedData]);
-
-        // Load the audio file
-        if (extractedData.audioUrl) {
-          setAudio(
-            new Sound(extractedData.audioUrl, '', error => {
-              if (error) {
-                console.log('Failed to load the sound', error);
-              }
-            }),
-          );
-        }
       } else {
         // Handle when no data is returned
         setDictionaryData([]);
@@ -94,41 +82,16 @@ const Dictionary = () => {
     }
   };
 
-  const loadAudio = () => {
-    if (audio) {
-      audio.release();
-    }
-    if (dictionaryData.length > 0 && dictionaryData[0].audioUrl) {
-      setAudio(
-        new Sound(dictionaryData[0].audioUrl, '', error => {
-          if (error) {
-            console.log('Failed to load the sound', error);
-          }
-        }),
-      );
-    }
-  };
-
   const playAudio = () => {
-    if (audio) {
-      audio.play(success => {
-        if (success) {
-          console.log('Successfully finished playing');
-        } else {
-          console.log('Playback failed due to audio decoding errors');
-        }
-      });
+    if (dictionaryData.length > 0) {
+      const wordToSpeak = dictionaryData[0].word;
+      Tts.speak(wordToSpeak);
     }
   };
 
   const handleSearch = () => {
     // Clear previous details
     setDictionaryData([]);
-    if (audio) {
-      audio.release();
-    }
-    setAudio(null);
-
     dictionaryApi();
     setWord('');
   };
@@ -136,9 +99,6 @@ const Dictionary = () => {
   useEffect(() => {
     return () => {
       // Cleanup function
-      if (audio) {
-        audio.release();
-      }
     };
   }, [dictionaryData]);
 
@@ -242,7 +202,7 @@ const Dictionary = () => {
               </View>
             ))}
           </ScrollView>
-          <BannerAdComponent />
+          {/* <BannerAdComponent /> */}
         </View>
       </View>
     </InternetCheck>

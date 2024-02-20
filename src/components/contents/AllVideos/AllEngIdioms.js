@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {View, Text, FlatList, AppState} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import styles from '../../../../Styles/AllVideosStyle';
 import {firebase} from '../../../../firebase/config';
@@ -10,6 +10,7 @@ const EngIdioms = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const youtubeRef = firebase.firestore().collection('idioms');
   const [loading, setLoading] = useState(true); //for loader
+  const playerRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +39,38 @@ const EngIdioms = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handleAppStateChange = nextAppState => {
+      if (nextAppState === 'inactive') {
+        // App is inactive, pause the video
+        playerRef.current.pause();
+      }
+    };
+
+    // Subscribe to app state changes
+    AppState.addEventListener('change', handleAppStateChange);
+
+    // Clean up subscription on component unmount
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange);
+    };
+  }, []);
+
+  const handleVideoPlay = () => {
+    // Do something when the video is played
+    console.log('Video played');
+  };
+
+  const handleVideoPause = () => {
+    // Do something when the video is paused
+    console.log('Video paused');
+  };
+
+  const handleVideoStateChange = state => {
+    // Handle video state changes (playing, paused, buffering, etc.)
+    console.log('Video state changed:', state);
+  };
+
   return (
     <InternetCheck>
       <View style={{flex: 1, alignItems: 'center', backgroundColor: '#fff'}}>
@@ -55,12 +88,16 @@ const EngIdioms = () => {
             renderItem={({item}) => (
               <View style={styles.videoContainer}>
                 <YoutubePlayer
+                  ref={playerRef}
                   height={300}
                   videoId={item.videoId}
                   play={false}
                   style={styles.youtube}
                   showinfo={false}
                   modestbranding
+                  onReady={handleVideoPlay}
+                  onPause={handleVideoPause}
+                  onChangeState={handleVideoStateChange}
                 />
 
                 <View style={styles.titleInfo}>

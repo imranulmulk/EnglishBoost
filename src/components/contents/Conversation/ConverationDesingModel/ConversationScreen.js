@@ -1,10 +1,15 @@
+import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, TouchableOpacity, ScrollView, Image} from 'react-native';
-import React, {useState, useRef} from 'react';
 
 const ConversationScreen = ({route}) => {
   const items = route.params?.Greeting || [];
   const [selectedIndices, setSelectedIndices] = useState([]);
   const scrollViewRef = useRef();
+
+  useEffect(() => {
+    // Scroll to the end of the ScrollView when selectedIndices change
+    scrollViewRef.current.scrollToEnd({animated: true});
+  }, [selectedIndices]);
 
   const renderItems = () => {
     return selectedIndices.map(index => (
@@ -20,7 +25,6 @@ const ConversationScreen = ({route}) => {
                 justifyContent: 'center',
                 flexDirection: 'row',
                 width: '90%',
-                // backgroundColor: 'red',
               }
             : {
                 width: '78%',
@@ -58,9 +62,7 @@ const ConversationScreen = ({route}) => {
                   marginLeft: 35,
                 }
           }>
-          <Text
-            style={{color: index % 2 === 0 ? '#005eff' : 'white'}}
-            key={index}>
+          <Text style={{color: index % 2 === 0 ? '#005eff' : 'white'}}>
             {items?.[index]}
           </Text>
         </View>
@@ -81,8 +83,8 @@ const ConversationScreen = ({route}) => {
       (selectedIndices.length > 0
         ? selectedIndices[selectedIndices.length - 1] + 1
         : 0) % items.length;
+
     setSelectedIndices([...selectedIndices, nextIndex]);
-    scrollViewRef.current.scrollToEnd({animated: true});
   };
 
   return (
@@ -91,7 +93,6 @@ const ConversationScreen = ({route}) => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: '#005eff',
       }}>
       <View
         style={{
@@ -122,23 +123,26 @@ const ConversationScreen = ({route}) => {
           style={{marginTop: 10}}>
           {renderItems()}
         </ScrollView>
-        <View style={{alignItems: 'center', margin: 20}}>
-          <TouchableOpacity
-            style={{
-              height: 70,
-              width: 70,
-              backgroundColor: '#005eff',
-              borderRadius: 50,
-              justifyContent: 'center',
-              alignItems: 'center',
-              elevation: 4,
-            }}
-            onPress={handleButtonClick}>
-            <Text style={{color: 'white', fontSize: 19, fontWeight: 'bold'}}>
-              Tap
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {/* Conditionally render the button based on whether all items have been displayed */}
+        {selectedIndices.length < items.length && (
+          <View style={{alignItems: 'center', margin: 20}}>
+            <TouchableOpacity
+              style={{
+                height: 70,
+                width: 70,
+                backgroundColor: '#005eff',
+                borderRadius: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+                elevation: 4,
+              }}
+              onPress={handleButtonClick}>
+              <Text style={{color: 'white', fontSize: 19, fontWeight: 'bold'}}>
+                Tap
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );
