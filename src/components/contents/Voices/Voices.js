@@ -9,13 +9,13 @@ const Voices = ({navigation}) => {
     {
       id: 1,
       title: 'Active Voice',
-      name: 'PosDefinition',
+      name: 'VoicesDefinition',
       definition: ActiveVoice,
     },
     {
       id: 2,
       title: 'Passive Voice',
-      name: 'PosDefinition',
+      name: 'VoicesDefinition',
       definition: PassiveVoice,
     },
   ];

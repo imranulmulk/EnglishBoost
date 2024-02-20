@@ -54,6 +54,7 @@ function AppNavigation() {
         <Stack.Screen name="Tense" component={Tense} />
         <Stack.Screen name="AllPos" component={AllPos} />
         <Stack.Screen name="PosDefinition" component={PosDefinition} />
+        <Stack.Screen name="VoicesDefinition" component={PosDefinition} />
         <Stack.Screen name="AllConversations" component={AllConversataions} />
         <Stack.Screen
           name="ConversationScreen"
